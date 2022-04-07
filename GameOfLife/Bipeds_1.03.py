@@ -17,7 +17,6 @@ class Population:
         value = value.lower()
         for people in self.pop_list:
             if people.gender.lower() == value:
-                print(people.name)
                 fgend_list.append(people)
         fgend_list.sort()
         return fgend_list
@@ -39,23 +38,17 @@ class Population:
             }
         for key, r in gen_mapping.items():
             if key in gen.lower():
-                print(r)
                 for people in self.pop_list:
                     if people.birthday in r:
                         gen_list.append(people)
-                        print(people.name)
-                    else:
-                        continue
                 gen_list.sort()
                 return gen_list
-        print(gen_mapping[self])
 
     def sort_name(self):
         sorted_list = []
         for people in self.pop_list:
-            sorted_list.append(people.name)
+            sorted_list.append(people)
         sorted_list.sort()
-        print(sorted_list)
         return sorted_list
 
 
