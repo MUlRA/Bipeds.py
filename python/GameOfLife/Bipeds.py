@@ -14,9 +14,9 @@ class Population:
 
     def filter_gender(self, value):
         """
-
-        :param value:
-        :return:
+        This is a function that filter humans in a list against a given gender
+        :param value: given gender
+        :return: list of human
         """
         fgend_list = []
         value = value.lower()
