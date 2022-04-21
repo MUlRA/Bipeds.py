@@ -18,7 +18,6 @@ class Population:
         for people in self.pop_list:
             if people.gender.lower() == value:
                 fgend_list.append(people)
-        fgend_list.sort()
         return fgend_list
 
     def filter_generation(self, gen):
@@ -28,21 +27,20 @@ class Population:
              It has one generation
              """
 
-        #key, value
-        gen_list = []
+        # key, value
+        hum_gen_list = []
         gen_mapping = {
-                'genx': range(1965, 1980),
-                'genz': range(1997, 2012),
-                'gena': range(2010, 2020),
-                'mill': range(1981, 1996)
-            }
+            'genx': range(1965, 1980),
+            'genz': range(1997, 2012),
+            'gena': range(2010, 2020),
+            'mill': range(1981, 1996)
+        }
         for key, gen_range in gen_mapping.items():
             if key == gen.lower():
                 for people in self.pop_list:
                     if people.birthday in gen_range:
-                        gen_list.append(people)
-                gen_list.sort()
-                return gen_list
+                        hum_gen_list.append(people)
+                return hum_gen_list
 
     def sort_name(self):
         sorted_list = []
