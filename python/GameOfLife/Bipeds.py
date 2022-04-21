@@ -13,6 +13,11 @@ class Population:
         self.pop_list = humans
 
     def filter_gender(self, value):
+        """
+
+        :param value:
+        :return:
+        """
         fgend_list = []
         value = value.lower()
         for people in self.pop_list:
@@ -43,6 +48,10 @@ class Population:
                 return hum_gen_list
 
     def sort_name(self):
+        """
+        This is a function that goes through the names of a given list of human and return it sorted.
+        :return: list of humans
+        """
         sorted_list = []
         for people in self.pop_list:
             sorted_list.append(people)
@@ -64,3 +73,4 @@ population.filter_gender('female')
 'genz': range(1997, 2012),
 'gena': range(2010, 2020),
 'mill': range(1981, 1996)"""
+
