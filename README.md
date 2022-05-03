@@ -1,0 +1,1 @@
+The game of life is a project to increase code base practice from coding any life aspect.
