@@ -7,6 +7,7 @@ CATH = Bipeds.Human("Cath", 1990, "woman")
 ZACH = Bipeds.Human("Zach", 1960, "man")
 ALICE = Bipeds.Human("Alice", 2010, "woman")
 
+
 POPULATION = [
     BOB,
     CATH,
@@ -41,6 +42,7 @@ class Test_Population(unittest.TestCase):
             'boomers': [ZACH],  # 1955-1964
             'mill': [CATH],  # 1981-1996
         }
+
         x = 0
         for gen, gen_expected_result in expected_result.items():
             with self.subTest(i=x):
