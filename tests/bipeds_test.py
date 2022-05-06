@@ -2,10 +2,11 @@ import unittest
 
 from GameOfLife import Bipeds
 
-BOB = Bipeds.Human("Bob", 1980, "Male")
-CATH = Bipeds.Human("Cath", 1990, "Female")
-ZACH = Bipeds.Human("Zach", 1960, "Male")
-ALICE = Bipeds.Human("Alice", 2010, "Female")
+BOB = Bipeds.Human("Bob", 1980, "man")
+CATH = Bipeds.Human("Cath", 1990, "woman")
+ZACH = Bipeds.Human("Zach", 1960, "man")
+ALICE = Bipeds.Human("Alice", 2010, "woman")
+
 
 POPULATION = [
     BOB,
@@ -42,8 +43,12 @@ class Test_Population(unittest.TestCase):
             'mill': [CATH],  # 1981-1996
         }
 
-        for gen, expected_result in expected_result.items():
-            self.assertEqual(population.filter_generation(gen), expected_result)
+        x = 0
+        for gen, gen_expected_result in expected_result.items():
+            with self.subTest(i=x):
+                self.assertEqual(population.filter_generation(gen), gen_expected_result,
+                                 msg="This gen: {}, fails to sort properly.".format(gen))
+            x += 1
 
     def test_sort_name(self):
         """
