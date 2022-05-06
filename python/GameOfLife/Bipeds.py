@@ -1,5 +1,3 @@
-from pprint import pprint
-
 
 class Human:
     def __init__(self, name, birthday, gender):
@@ -35,17 +33,22 @@ class Population:
         # key, value
         hum_gen_list = []
         gen_mapping = {
-            'genx': range(1965, 1980),
-            'genz': range(1997, 2012),
-            'gena': range(2010, 2020),
-            'mill': range(1981, 1996)
+            'boomers': range(1955,1964),
+            'genx': range(1965, 1981),
+            'genz': range(1997, 2013),
+            'gena': range(2010, 2021),
+            'zoomers': range(1997,2022),
+            'mill': range(1981, 1997)
         }
-        for key, gen_range in gen_mapping.items():
-            if key == gen.lower():
-                for people in self.pop_list:
-                    if people.birthday in gen_range:
-                        hum_gen_list.append(people)
-                return hum_gen_list
+        gen_range = gen_mapping[gen.lower()]
+
+        if gen.lower() != gen_mapping:
+            "Not a supported generation"
+            return []
+        for people in self.pop_list:
+            if people.birthday in gen_range:
+                hum_gen_list.append(people)
+        return hum_gen_list
 
     def sort_name(self):
         """
@@ -57,20 +60,4 @@ class Population:
             sorted_list.append(people)
         sorted_list.sort()
         return sorted_list
-
-
-people_list = [
-    Human("Bob", 2006, "Robot"),
-    Human("Cath", 1980, "Female"),
-    Human("Zach", 2012, "Male"),
-    Human("Alice", 1995, "Female"),
-]
-
-population = Population(people_list)
-population.filter_gender('female')
-""" 
-'genx': range(1965, 1980),
-'genz': range(1997, 2012),
-'gena': range(2010, 2020),
-'mill': range(1981, 1996)"""
 
