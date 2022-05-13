@@ -7,7 +7,6 @@ CATH = Bipeds.Human("Cath", 1990, "woman")
 ZACH = Bipeds.Human("Zach", 1960, "man")
 ALICE = Bipeds.Human("Alice", 2010, "woman")
 
-
 POPULATION = [
     BOB,
     CATH,
@@ -16,11 +15,29 @@ POPULATION = [
 ]
 
 
+class Test_Human(unittest.TestCase):
+    def test_sorting(self):
+        """
+        Can the test sort by names Humans in a list.
+        """
+        expected_result = list(POPULATION)
+        expected_result.sort(key=lambda x: x.name)
+        list_of_humans = list(POPULATION)
+        list_of_humans.sort()
+        self.assertEqual(list_of_humans, expected_result)
+
+    def test_equality(self):
+        """
+        Can we compare humans to determine if they are the same by there data alone.
+        """
+        self.assertTrue(Bipeds.Human("Cath", 1990, "woman") == Bipeds.Human("Cath", 1990, "woman"))
+        self.assertTrue(Bipeds.Human("Cath", 1990, "woman") != Bipeds.Human("Henry", 1330, "man"))
+
+
 class Test_Population(unittest.TestCase):
     def test_filter_gender(self):
         """
-
-        :return:
+        Can you filter the population by gender.
         """
         population = Bipeds.Population(POPULATION)
         expected_result = {
@@ -32,8 +49,7 @@ class Test_Population(unittest.TestCase):
 
     def test_filter_generation(self):
         """
-
-        :return:
+        Can you filter a population by it's generation.
         """
         population = Bipeds.Population(POPULATION)
         expected_result = {
@@ -50,12 +66,24 @@ class Test_Population(unittest.TestCase):
                                  msg="This gen: {}, fails to sort properly.".format(gen))
             x += 1
 
-    def test_sort_name(self):
+    def test_sort(self):
         """
-
-        :return:
+        Can you sort a population by name and age. We are testing mostly that the custom logic for sort is made here.
+        We are expecting the method name to be sort and it will act differently if the class Population.sort_method is
+        set to age or name.
         """
         population = Bipeds.Population(POPULATION)
-        names = [pop.name for pop in population.pop_list]
-        names.sort()
-        self.assertEqual(names, population.sort_name())
+        holder = [(pop.name, pop) for pop in population.pop_list]
+        holder.sort(key=lambda x: x[0])
+        with self.subTest(i=0):
+            population.sort_method = 'name'
+            correct_answer = [person for _, person in holder]
+            self.assertEqual(correct_answer, population.sort(),
+                             msg="Sort method of the Human class doesn't support sorting by name.")
+        holder = [(pop.birthday, pop) for pop in population.pop_list]
+        population.sort_method = "age"
+        with self.subTest(i=1):
+            holder.sort(key=lambda x: x[0])
+            correct_answer = [person for _, person in holder]
+            self.assertEqual(correct_answer, population.sort(),
+                             msg="Sort method of the Human class doesn't support sorting by age.")
